@@ -21,12 +21,12 @@ library(ggtext) # ggplot labels
 library(modelsummary)
 
 # loading the data
-imp_data_long <- read_csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/imp_data_long.csv")
+imp_data_long <- read_csv("Data/imp_data_long.csv")
 
 # loading summary data
-pooled_prevalence <- read.csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_prevalence.csv")
-pooled_RR_adj <- read.csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_RR_adj.csv")
-pooled_RR_adj_2023 <- read.csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_RR_adj_2023.csv")
+pooled_prevalence <- read.csv("pooled_prevalence.csv")
+pooled_RR_adj <- read.csv("Tables/pooled_RR_adj.csv")
+pooled_RR_adj_2023 <- read.csv("pooled_RR_adj_2023.csv")
 
 
 
@@ -64,7 +64,7 @@ pooled_prevalence <- prevalence_lonely %>%
                         select(estimate, '2.5 %',  '97.5 %'))) %>% 
   select(pooled) %>% 
   unnest()
-write.csv(pooled_prevalence, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_prevalence.csv")
+write.csv(pooled_prevalence, "/Results/Tables/pooled_prevalence.csv")
 
 
 table_pooled_prevalence <- pooled_prevalence %>% 
@@ -74,7 +74,7 @@ table_pooled_prevalence <- pooled_prevalence %>%
   select(dataset, country, estimate) %>% 
   pivot_wider(names_from = dataset,
               values_from = estimate)
-write.csv(table_pooled_prevalence, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/table_pooled_prevalence.csv")
+write.csv(table_pooled_prevalence, "/Results/Tables/table_pooled_prevalence.csv")
 
 windowsFonts(Times = windowsFont("Times New Roman"))
 country_grey_preval <-  unique(pooled_prevalence$country)[seq(1, length(unique(pooled_prevalence$country)), by = 2)]
@@ -112,7 +112,7 @@ plot_prevalence_2022 <- pooled_prevalence %>%
        color = "") 
 
 ggsave(filename = "plot_prevalence_2022.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 18,
        device = "jpeg",
@@ -222,7 +222,7 @@ prevalence_map2 <- EU4_prevalence_map + ESS7_prevalence_map
 prevalence_map <- prevalence_map1 / prevalence_map2
 
 ggsave(filename = "prevalence_map.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 18.5,
        height = 24,
        device = "jpeg",
@@ -329,7 +329,7 @@ love_plot_combined_EU27vsESS11 <- wrap_plots(filter(models_adj_EU27vsESS11, .imp
                   caption = "Standardized mean difference")
 
 ggsave(filename = "love_plot_combined_EU27vsESS11.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 18,
        height = 12,
        device = "jpeg",
@@ -347,7 +347,7 @@ prop_score_plot_combined_EU27vsESS11 <- wrap_plots(filter(models_adj_EU27vsESS11
                   caption = "Propensity score")
 
 ggsave(filename = "prop_score_plot_combined_EU27vsESS11.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 18,
        height = 12,
        device = "jpeg",
@@ -456,7 +456,7 @@ love_plot_combined_EU4vsESS11 <- wrap_plots(filter(models_adj_EU4vsESS11, .imp =
                   caption = "Standardized mean difference")
 
 ggsave(filename = "love_plot_combined_EU4vsESS11.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 9,
        height = 9,
        device = "jpeg",
@@ -474,7 +474,7 @@ prop_score_plot_combined_EU4vsESS11 <- wrap_plots(filter(models_adj_EU4vsESS11, 
                   caption = "Propensity score")
 
 ggsave(filename = "prop_score_plot_combined_EU4vsESS11.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 9,
        height = 9,
        device = "jpeg",
@@ -584,7 +584,7 @@ love_plot_combined_EU27vsEU4 <- wrap_plots(filter(models_adj_EU27vsEU4, .imp == 
                   caption = "Standardized mean difference")
 
 ggsave(filename = "love_plot_combined_EU27vsEU4.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 9,
        height = 9,
        device = "jpeg",
@@ -602,7 +602,7 @@ prop_score_plot_combined_EU27vsEU4 <- wrap_plots(filter(models_adj_EU27vsEU4, .i
                   caption = "Propensity score")
 
 ggsave(filename = "prop_score_plot_combined_EU27vsEU4.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 9,
        height = 9,
        device = "jpeg",
@@ -656,7 +656,7 @@ meta_regr_est <- tibble(country = "**POOLED<br>ESTIMATE**",
                         `97.5 %` = c(exp(meta_regr_EU4vsESS11$upper.random), exp(meta_regr_EU27vsESS11$upper.random), exp(meta_regr_EU27vsEU4$upper.random)))
 
 pooled_RR_adj <- bind_rows(all_RR_adj, meta_regr_est)
-write.csv(pooled_RR_adj, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_RR_adj.csv")
+write.csv(pooled_RR_adj, "/Results/Tables/pooled_RR_adj.csv")
 
 table_pooled_RR_adj <- pooled_RR_adj %>% 
   mutate(across(c(estimate, `2.5 %`, `97.5 %`),
@@ -665,7 +665,7 @@ table_pooled_RR_adj <- pooled_RR_adj %>%
   select(term, country, estimate) %>% 
   pivot_wider(names_from = term,
               values_from = estimate) 
-write.csv(table_pooled_RR_adj, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/table_pooled_RR_adj.csv")
+write.csv(table_pooled_RR_adj, "/Results/Tables/table_pooled_RR_adj.csv")
 
 windowsFonts(Times = windowsFont("Times New Roman"))
 grey_country_ess11 <- c("Spain", "Slovakia", "Poland", "Lithuania", "Ireland", "Greece", "France", "Cyprus", "Bulgaria", "Austria")
@@ -750,7 +750,7 @@ plot_RR_2022_combined <- plot_RR_2022_EU4ref + plot_RR_2022_ESS11ref +
   plot_layout(heights = c(1, 4.25))
 
 ggsave(filename = "plot_RR_2022_combined.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 18,
        device = "jpeg",
@@ -760,7 +760,7 @@ ggsave(filename = "plot_RR_2022_combined.jpeg",
 plot_2022_combined <- plot_prevalence_2022 + plot_RR_2022_combined 
 
 ggsave(filename = "plot_2022_combined.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 30,
        height = 18,
        device = "jpeg",
@@ -858,7 +858,7 @@ plot_prevalence_trend <- diff_plot_eu27 + diff_plot_ess11 +
 
 
 ggsave(filename = "plot_prevalence_trend.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 18,
        height = 12,
        device = "jpeg",
@@ -989,8 +989,8 @@ meta_RD_2023 <- pooled_RD_2023_vs_2014 %>%
 
 pooled_RR_adj_2023 <- bind_rows(pooled_RR_2023_vs_2014, meta_RR_2023)
 pooled_RD_adj_2023 <- bind_rows(pooled_RD_2023_vs_2014, meta_RD_2023)
-write.csv(pooled_RR_adj_2023, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_RR_adj_2023.csv")
-write.csv(pooled_RD_adj_2023, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_RD_adj_2023.csv")
+write.csv(pooled_RR_adj_2023, "/Results/Tables/pooled_RR_adj_2023.csv")
+write.csv(pooled_RD_adj_2023, "/Results/Tables/pooled_RD_adj_2023.csv")
 
 table_pooled_RR_adj_2023 <- pooled_RR_adj_2023 %>% 
   mutate(across(c(estimate, `2.5 %`, `97.5 %`),
@@ -999,7 +999,7 @@ table_pooled_RR_adj_2023 <- pooled_RR_adj_2023 %>%
   select(dataset, country, estimate) %>% 
   pivot_wider(names_from = dataset,
               values_from = estimate) 
-write.csv(table_pooled_RR_adj_2023, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/table_pooled_RR_adj_2023.csv")
+write.csv(table_pooled_RR_adj_2023, "/Results/Tables/table_pooled_RR_adj_2023.csv")
 
 table_pooled_RD_adj_2023 <- pooled_RD_adj_2023 %>% 
   mutate(across(c(estimate, `2.5 %`, `97.5 %`),
@@ -1008,7 +1008,7 @@ table_pooled_RD_adj_2023 <- pooled_RD_adj_2023 %>%
   select(dataset, country, estimate) %>% 
   pivot_wider(names_from = dataset,
               values_from = estimate) 
-write.csv(table_pooled_RD_adj_2023, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/table_pooled_RD_adj_2023.csv")
+write.csv(table_pooled_RD_adj_2023, "/Results/Tables/table_pooled_RD_adj_2023.csv")
 
 
 trend_grey_country <- c("Austria", "Czechia", "Estonia", "France", "Hungary", "Israel", "Netherlands", "Poland", "Slovenia", "Sweden", "United Kingdom")   
@@ -1049,7 +1049,7 @@ plot_RR_2023 <- pooled_RR_adj_2023 %>%
        color = "") 
 
 ggsave(filename = "plot_RR_2023.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 16,
        device = "jpeg",
@@ -1090,8 +1090,9 @@ plot_RD_2023 <- pooled_RD_adj_2023 %>%
        color = "") 
 
 ggsave(filename = "plot_RD_2023.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 16,
        device = "jpeg",
        dpi=300)
+
