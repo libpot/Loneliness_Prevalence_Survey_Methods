@@ -1,4 +1,4 @@
-# ‘Loneliness epidemic’? Time trends in loneliness prevalence in Europe and the role of survey methodology
+# The ‘Loneliness Epidemic’ Revisited: Survey Methodology Effects in European Trends
 
 This repository contains the complete analytical code encompassing:
 - data pre-processing and descriptive statistics, 
