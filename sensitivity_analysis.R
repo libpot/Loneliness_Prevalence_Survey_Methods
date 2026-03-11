@@ -17,7 +17,7 @@ library(meta) # meta-analysis
 library(ggtext) # ggplot labels
 library(modelsummary)
 
-ESS_EULS_dataset <- read_csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/ESS_EULS_dataset.csv")
+ESS_EULS_dataset <- read_csv("/Datasets/Data/ESS_EULS_dataset.csv")
 
 
 loneliness_means <- ESS_EULS_dataset  %>% 
@@ -56,7 +56,7 @@ imp_data <- mice(ESS_EULS_dataset,
 
 plot(imp_data)
 imp_data_long_sensitivity <- complete(imp_data, "long", include = T)
-write.csv(imp_data_long_sensitivity, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/imp_data_long_sensitivity.csv")
+write.csv(imp_data_long_sensitivity, "/Datasets/Data/imp_data_long_sensitivity.csv")
 
 
 
@@ -92,7 +92,7 @@ pooled_prevalence_sens <- prevalence_lonely_sens %>%
                         select(estimate, '2.5 %',  '97.5 %'))) %>% 
   select(pooled) %>% 
   unnest()
-write.csv(pooled_prevalence_sens, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_prevalence_sens.csv")
+write.csv(pooled_prevalence_sens, "/Results/Tables/pooled_prevalence_sens.csv")
 
 
 table_pooled_prevalence_sens <- pooled_prevalence_sens %>% 
@@ -102,7 +102,7 @@ table_pooled_prevalence_sens <- pooled_prevalence_sens %>%
   select(dataset, country, scale, estimate) %>% 
   pivot_wider(names_from = dataset,
               values_from = estimate)
-write.csv(table_pooled_prevalence_sens, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/table_pooled_prevalence_sens.csv")
+write.csv(table_pooled_prevalence_sens, "/Results/Tables/table_pooled_prevalence_sens.csv")
 
 windowsFonts(Times = windowsFont("Times New Roman"))
 country_grey_preval <-  unique(pooled_prevalence_sens$country)[seq(1, length(unique(pooled_prevalence_sens$country)), by = 2)]
@@ -140,7 +140,7 @@ plot_prevalence_2022_conti_dir <- pooled_prevalence_sens %>%
        color = "") 
 
 ggsave(filename = "plot_prevalence_2022_conti_dir.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 18,
        device = "jpeg",
@@ -188,7 +188,7 @@ plot_prevalence_2022_indirect <- pooled_prevalence_sens %>%
        color = "") 
 
 ggsave(filename = "plot_prevalence_2022_indirect.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 12,
        device = "jpeg",
@@ -368,7 +368,7 @@ meta_regr_est_diff <- tibble(country = "**POOLED<br>ESTIMATE**",
                         `97.5 %` = c(meta_diff_EU4vsESS11$upper.random, meta_diff_EU27vsESS11$upper.random, meta_diff_EU27vsEU4$upper.random))
 
 pooled_diff_conti_dir <- bind_rows(all_diff_adj, meta_regr_est_diff)
-write.csv(pooled_diff_conti_dir, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_diff_conti_dir.csv")
+write.csv(pooled_diff_conti_dir, "/Results/Tables/pooled_diff_conti_dir.csv")
 
 table_pooled_diff_conti_dir <- pooled_diff_conti_dir %>% 
   mutate(across(c(estimate, `2.5 %`, `97.5 %`),
@@ -377,7 +377,7 @@ table_pooled_diff_conti_dir <- pooled_diff_conti_dir %>%
   select(term, country, estimate) %>% 
   pivot_wider(names_from = term,
               values_from = estimate) 
-write.csv(table_pooled_diff_conti_dir, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/table_pooled_diff_conti_dir.csv")
+write.csv(table_pooled_diff_conti_dir, "/Results/Tables/table_pooled_diff_conti_dir.csv")
 
 windowsFonts(Times = windowsFont("Times New Roman"))
 grey_country_ess11 <- c("Spain", "Slovakia", "Poland", "Lithuania", "Ireland", "Greece", "France", "Cyprus", "Bulgaria", "Austria")
@@ -461,7 +461,7 @@ plot_diff_2022_combined_conti_dir <- plot_diff_2022_EU4ref_conti_dir + plot_diff
   plot_layout(heights = c(1, 4.25))
 
 ggsave(filename = "plot_diff_2022_combined_conti_dir.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 18,
        device = "jpeg",
@@ -542,7 +542,7 @@ meta_regr_est_diff_indir <- tibble(country = "**POOLED<br>ESTIMATE**",
                              `97.5 %` = c(meta_diff_indir_ucla$upper.random, meta_diff_indir_djg$upper.random))
 
 pooled_diff_indir <- bind_rows(pooled_adj_diff_indir, meta_regr_est_diff_indir)
-write.csv(pooled_diff_indir, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_diff_indir.csv")
+write.csv(pooled_diff_indir, "/Results/Tables/pooled_diff_indir.csv")
 
 table_pooled_diff_indir <- pooled_diff_indir %>% 
   mutate(across(c(estimate, `2.5 %`, `97.5 %`),
@@ -551,7 +551,7 @@ table_pooled_diff_indir <- pooled_diff_indir %>%
   select(scale, country, estimate) %>% 
   pivot_wider(names_from = scale,
               values_from = estimate) 
-write.csv(table_pooled_diff_indir, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/table_pooled_diff_indir.csv")
+write.csv(table_pooled_diff_indir, "/Results/Tables/table_pooled_diff_indir.csv")
 
 windowsFonts(Times = windowsFont("Times New Roman"))
 grey_country_ess11 <- c("Spain", "Slovakia", "Poland", "Lithuania", "Ireland", "Greece", "France", "Cyprus", "Bulgaria", "Austria")
@@ -596,11 +596,12 @@ plot_diff_indir <- pooled_diff_indir %>%
        fill = "") 
 
 ggsave(filename = "plot_diff_indir.jpeg",
-       path = "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Graphs", 
+       path = "/Results/Graphs", 
        width = 16,
        height = 12,
        device = "jpeg",
        dpi=300)
+
 
 
 
