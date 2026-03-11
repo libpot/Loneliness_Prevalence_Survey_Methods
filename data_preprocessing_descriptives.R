@@ -22,18 +22,18 @@ library(modelsummary)
 
 
 # loading the data
-ESS11 <- read_csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/ESS11/ESS11.csv")
-EU27 <- read_dta("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/EU_Lonely/eu_loneliness_survey_eu27.dta")
-EU4 <- read_dta("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/EU_Lonely_E4/eu_loneliness_survey_eu4.dta")
-ESS7 <- read_sav("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/ESS7/ESS7e02_3.sav")
-ESS7_w <- read_sav("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/ESS7/ESS7SDDFe1_2.sav")
+ESS11 <- read_csv("ESS11.csv")
+EU27 <- read_dta("eu_loneliness_survey_eu27.dta")
+EU4 <- read_dta("eu_loneliness_survey_eu4.dta")
+ESS7 <- read_sav("ESS7e02_3.sav")
+ESS7_w <- read_sav("ESS7SDDFe1_2.sav")
 ESS7 <- as_tibble(merge(ESS7, ESS7_w, by = c("cntry", "idno")))
-imp_data_long <- read_csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/imp_data_long.csv")
+imp_data_long <- read_csv("imp_data_long.csv")
 
 # loading summary data
-pooled_prevalence <- read.csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_prevalence.csv")
-pooled_RR_adj <- read.csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_RR_adj.csv")
-pooled_RR_adj_2023 <- read.csv("C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/pooled_RR_adj_2023.csv")
+pooled_prevalence <- read.csv("pooled_prevalence.csv")
+pooled_RR_adj <- read.csv("pooled_RR_adj.csv")
+pooled_RR_adj_2023 <- read.csv("pooled_RR_adj_2023.csv")
 
 
 
@@ -337,7 +337,7 @@ ESS_EULS_dataset <- bind_rows(ESS7_data, ESS11_data, EU27_data, EU4_data) %>%
                 ~ factor(.x, ordered = F)),
          across(c(age, household_income, BMI, phys_activity, ucla_loneli, djg_loneli, conti_dir_loneli),
                 ~ as.numeric(.x)))
-write.csv(ESS_EULS_dataset, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/ESS_EULS_dataset.csv")
+write.csv(ESS_EULS_dataset, "ESS_EULS_dataset.csv")
 
 
 # SAMPLE SIZES
@@ -348,7 +348,7 @@ ESS_EULS_sample_sizes <- ESS_EULS_dataset  %>%
   pivot_wider(names_from = dataset, values_from = n) %>% 
   select(country, ESS7, ESS11, EU27, EU4) %>% 
   arrange(country)
-write.csv(ESS_EULS_sample_sizes, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/ESS_EULS_sample_sizes.csv")
+write.csv(ESS_EULS_sample_sizes, "ESS_EULS_sample_sizes.csv")
 
 
 # SAMPLE CHARACTERISTICS
@@ -385,7 +385,7 @@ ESS_EULS_sample_characteristics <- rbind(ESS_EULS_props, ESS_EULS_means) %>%
                                   "phys_activity", "smoking", "BMI"))) %>% 
   filter(!value %in% c("rural", "none", "other")) %>% 
   arrange(name, value, country)
-write.csv(ESS_EULS_sample_characteristics, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/ESS_EULS_sample_characteristics.csv")
+write.csv(ESS_EULS_sample_characteristics, "ESS_EULS_sample_characteristics.csv")
 
 
 overall_props <- ESS_EULS_dataset  %>% 
@@ -418,7 +418,7 @@ overall_sample_characteristics <- rbind(overall_props, overall_means) %>%
                                   "phys_activity", "smoking", "BMI"))) %>% 
   filter(!value %in% c("rural", "none", "other")) %>% 
   arrange(name, value)
-write.csv(ESS_EULS_sample_characteristics, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/ESS_EULS_sample_characteristics.csv")
+write.csv(ESS_EULS_sample_characteristics, "ESS_EULS_sample_characteristics.csv")
 
 # age range of the study samples: from 16 to 80 years
 ESS_EULS_age_ranges <- ESS_EULS_dataset  %>% 
@@ -431,7 +431,7 @@ ESS_EULS_age_ranges <- ESS_EULS_dataset  %>%
   pivot_wider(names_from = dataset, values_from = stat) %>% 
   select(country, ESS7, ESS11, EU27, EU4) %>% 
   arrange(country)
-write.csv(ESS_EULS_age_ranges, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/ESS_EULS_age_ranges.csv")
+write.csv(ESS_EULS_age_ranges, "ESS_EULS_age_ranges.csv")
 
 # MISSING DATA
 ESS_EULS_missing_prop_lonely <- ESS_EULS_dataset %>% 
@@ -448,7 +448,7 @@ ESS_EULS_missing_prop_lonely <- ESS_EULS_dataset %>%
   pivot_wider(names_from = dataset, values_from = stat) %>% 
   select(country, ESS7, ESS11, EU27, EU4) %>% 
   arrange(country)
-write.csv(ESS_EULS_missing_prop_lonely, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Prevalence/Results/Tables/ESS_EULS_missing_prop_lonely.csv")
+write.csv(ESS_EULS_missing_prop_lonely, "ESS_EULS_missing_prop_lonely.csv")
 
 
 
@@ -482,4 +482,5 @@ imp_data <- mice(ESS_EULS_dataset,
 
 plot(imp_data)
 imp_data_long <- complete(imp_data, "long", include = T)
-write.csv(imp_data_long, "C:/Users/hp/Desktop/PhD_Oslo/Research/Loneliness_Norms_Contexts/Datasets/Data/imp_data_long.csv")
+write.csv(imp_data_long, "imp_data_long.csv")
+
